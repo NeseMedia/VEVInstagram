@@ -95,8 +95,8 @@
           "name": "apiEndpoint",
           "type": "string",
           "title": "API Endpoint URL",
-          "description": "Din Vercel API URL",
-          "initialValue": "https://vev-instagram-jgw391ida-nesemedias-projects.vercel.app/api/instagram"
+          "description": "Railway API URL - må slutte med /api/instagram",
+          "initialValue": "https://vevinstagram-production.up.railway.app/api/instagram"
         }
       ],
       "type": 0,
@@ -193,8 +193,8 @@
       "shareWithAccount": false,
       "admin": false,
       "content": "",
-      "updated": 1754832774489,
-      "created": 1754832774489
+      "updated": 1754838785389,
+      "created": 1754838785389
     }
   ],
   "shareWithAccount": false

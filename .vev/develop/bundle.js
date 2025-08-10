@@ -89,7 +89,7 @@ System.register("aaBMkGO4J2InY9M2VbZp", ["react", "react-dom", "vev"], function 
     buttonTextColor = "#FFFFFF",
     textColor = "#000000",
     borderRadius = 12,
-    apiEndpoint = "https://vev-instagram-jgw391ida-nesemedias-projects.vercel.app/api/instagram"
+    apiEndpoint = "https://vevinstagram-production.up.railway.app/api/instagram"
   }) => {
     const [profile, setProfile] = (0, import_react.useState)(null);
     const [loading, setLoading] = (0, import_react.useState)(false);
@@ -284,8 +284,8 @@ System.register("aaBMkGO4J2InY9M2VbZp", ["react", "react-dom", "vev"], function 
         name: "apiEndpoint",
         type: "string",
         title: "API Endpoint URL",
-        description: "Din Vercel API URL",
-        initialValue: "https://vev-instagram-jgw391ida-nesemedias-projects.vercel.app/api/instagram"
+        description: "Railway API URL - m\xE5 slutte med /api/instagram",
+        initialValue: "https://vevinstagram-production.up.railway.app/api/instagram"
       }
     ],
     editableCSS: [

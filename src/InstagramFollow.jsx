@@ -13,7 +13,7 @@ const InstagramFollow = ({
   buttonTextColor = '#FFFFFF',
   textColor = '#000000',
   borderRadius = 12,
-  apiEndpoint = 'https://vev-instagram-jgw391ida-nesemedias-projects.vercel.app/api/instagram'
+  apiEndpoint = 'https://vevinstagram-production.up.railway.app/api/instagram'
 }) => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -272,8 +272,8 @@ registerVevComponent(InstagramFollow, {
       name: 'apiEndpoint',
       type: 'string',
       title: 'API Endpoint URL',
-      description: 'Din Vercel API URL',
-      initialValue: 'https://vev-instagram-jgw391ida-nesemedias-projects.vercel.app/api/instagram'
+      description: 'Railway API URL - må slutte med /api/instagram',
+      initialValue: 'https://vevinstagram-production.up.railway.app/api/instagram'
     }
   ],
   editableCSS: [
