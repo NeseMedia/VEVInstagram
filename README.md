@@ -1,47 +1,48 @@
 # Instagram Follow Widget for Vev
 
-Widget for å vise Instagram-profiler i Vev med Vercel API.
+Widget for å vise Instagram-profiler i Vev med Railway API.
 
-## Deploy til Vercel
+## Deploy til Railway
 
-### Steg 1: Installer Vercel CLI (om du ikke har det)
-```bash
-npm install -g vercel
+### Rask deploy via GitHub
+
+1. Gå til [railway.app](https://railway.app)
+2. Klikk "Start a New Project"
+3. Velg "Deploy from GitHub repo"
+4. Velg `NeseMedia/VEVInstagram` repository
+5. Railway vil automatisk:
+   - Installere dependencies
+   - Starte serveren
+   - Gi deg en URL
+
+### Etter deploy
+
+Når Railway er ferdig får du en URL som f.eks:
+```
+https://vev-instagram-production.up.railway.app
 ```
 
-### Steg 2: Deploy til Vercel
-```bash
-# I prosjektmappen, kjør:
-vercel
-
-# Følg instruksjonene:
-# - Logg inn med din Vercel-konto
-# - Velg "Y" for å deploye
-# - Gi prosjektet et navn (f.eks. "vev-instagram-api")
-# - Velg default settings
+Oppdater `apiEndpoint` i Vev-komponenten til:
+```
+https://vev-instagram-production.up.railway.app/api/instagram
 ```
 
-### Steg 3: Oppdater API URL i Vev
-Etter deploy vil du få en URL som f.eks: `https://vev-instagram-api.vercel.app`
+## API Endpoints
 
-I Vev-komponenten, oppdater `apiEndpoint` til:
-```
-https://vev-instagram-api.vercel.app/api/instagram
-```
-
-## Hvordan det fungerer
-
-1. **Vev-komponenten** (`src/InstagramFollow.jsx`) viser Instagram-widget i Vev
-2. **Vercel API** (`api/instagram.js`) håndterer forespørsler om Instagram-data
-3. API-et prøver å hente data fra Instagram, men returnerer fallback-data om nødvendig
+- `GET /` - Info-side
+- `GET /api/instagram?username={brukernavn}` - Hent Instagram-data
 
 ## Testing lokalt
+
 ```bash
 npm install
-vercel dev
+npm start
 ```
 
 Besøk: `http://localhost:3000/api/instagram?username=cristiano`
 
-## Produksjon
-Etter deploy, bruk din Vercel URL i Vev-komponenten.
+## Teknologi
+
+- Node.js med Express
+- Deployed på Railway
+- CORS aktivert for Vev-integrasjon
