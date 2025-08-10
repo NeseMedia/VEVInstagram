@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Icon - Instagram Widget for Vev</title>
+    <meta name="description" content="App icon for Instagram Widget for Vev - Download in multiple sizes for Meta App submission">
+    <style>___STYLES___</style>
+    <style>
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .icon-preview {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .icon-preview img {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 20%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .icon-size {
+            font-size: 18px;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+        
+        .icon-desc {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        
+        .download-btn {
+            background: #28a745;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .download-btn:hover {
+            background: #218838;
+        }
+        
+        .color-palette {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .color-swatch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .color-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .main-icon {
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+            filter: drop-shadow(0 10px 40px rgba(0,0,0,0.15));
+        }
+        
+        .guidelines {
+            background: #e8f4fd;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 4px solid #1877f2;
+        }
+        
+        .guidelines h3 {
+            color: #1877f2;
+            margin-top: 0;
+        }
+        
+        .guidelines ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        .guidelines li {
+            margin: 10px 0;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">
+                    <div class="logo-icon">📷</div>
+                    <span class="logo-text">Instagram Widget for Vev</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/app-icon">App Icon</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <h1 style="text-align: center;">App Icon for Meta App Submission</h1>
+                <p style="text-align: center; color: #6c757d; margin-bottom: 40px;">
+                    Professional app icon designed for Instagram Widget for Vev
+                </p>
+                
+                <!-- Main Icon Display -->
+                <img src="/app-icon.svg" alt="Instagram Widget for Vev App Icon" class="main-icon">
+                
+                <!-- Color Palette -->
+                <h2 style="margin-top: 50px;">Brand Colors</h2>
+                <div class="color-palette">
+                    <div class="color-swatch">
+                        <div class="color-box" style="background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCB045);"></div>
+                        <div>
+                            <strong>Instagram Gradient</strong><br>
+                            <code>#833AB4 → #FD1D1D → #FCB045</code>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-box" style="background: #42B883;"></div>
+                        <div>
+                            <strong>Vev Green</strong><br>
+                            <code>#42B883</code>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-box" style="background: #ffffff; border: 1px solid #dee2e6;"></div>
+                        <div>
+                            <strong>White</strong><br>
+                            <code>#FFFFFF</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Icon Sizes -->
+            <div class="card">
+                <h2>Download Icon Sizes</h2>
+                <p>All required sizes for Meta App submission and various platforms:</p>
+                
+                <div class="icon-grid">
+                    <div class="icon-preview">
+                        <img src="/app-icon.svg" alt="1024x1024 Icon">
+                        <div class="icon-size">1024×1024</div>
+                        <div class="icon-desc">Meta App Store</div>
+                        <a href="/app-icon.svg" download="app-icon-1024.svg" class="download-btn">Download SVG</a>
+                    </div>
+                    
+                    <div class="icon-preview">
+                        <img src="/app-icon.svg" alt="512x512 Icon">
+                        <div class="icon-size">512×512</div>
+                        <div class="icon-desc">High Resolution</div>
+                        <button onclick="downloadPNG(512)" class="download-btn">Generate PNG</button>
+                    </div>
+                    
+                    <div class="icon-preview">
+                        <img src="/app-icon.svg" alt="256x256 Icon">
+                        <div class="icon-size">256×256</div>
+                        <div class="icon-desc">Medium Resolution</div>
+                        <button onclick="downloadPNG(256)" class="download-btn">Generate PNG</button>
+                    </div>
+                    
+                    <div class="icon-preview">
+                        <img src="/app-icon.svg" alt="128x128 Icon">
+                        <div class="icon-size">128×128</div>
+                        <div class="icon-desc">Standard</div>
+                        <button onclick="downloadPNG(128)" class="download-btn">Generate PNG</button>
+                    </div>
+                    
+                    <div class="icon-preview">
+                        <img src="/app-icon.svg" alt="64x64 Icon">
+                        <div class="icon-size">64×64</div>
+                        <div class="icon-desc">Small</div>
+                        <button onclick="downloadPNG(64)" class="download-btn">Generate PNG</button>
+                    </div>
+                    
+                    <div class="icon-preview">
+                        <img src="/app-icon.svg" alt="32x32 Icon">
+                        <div class="icon-size">32×32</div>
+                        <div class="icon-desc">Favicon</div>
+                        <button onclick="downloadPNG(32)" class="download-btn">Generate PNG</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usage Guidelines -->
+            <div class="card">
+                <div class="guidelines">
+                    <h3>📋 Meta App Icon Requirements</h3>
+                    <ul>
+                        <li><strong>Format:</strong> PNG or JPG (we provide both SVG and PNG)</li>
+                        <li><strong>Size:</strong> 1024x1024 pixels for best quality</li>
+                        <li><strong>Background:</strong> Should not be transparent</li>
+                        <li><strong>Corners:</strong> Square format (Meta will apply rounding)</li>
+                        <li><strong>Text:</strong> Avoid small text that won't be readable at small sizes</li>
+                    </ul>
+                </div>
+                
+                <h2>Icon Design Elements</h2>
+                <p>Our app icon combines recognizable elements from both Instagram and Vev:</p>
+                <ul style="line-height: 2; color: #495057;">
+                    <li>📸 <strong>Camera Symbol:</strong> Represents Instagram's photography focus</li>
+                    <li>🎨 <strong>Instagram Gradient:</strong> Classic Instagram brand colors</li>
+                    <li>✅ <strong>Vev Badge:</strong> Green "V" badge showing Vev platform integration</li>
+                    <li>💎 <strong>Professional Design:</strong> Clean, modern appearance suitable for business use</li>
+                </ul>
+                
+                <h2 style="margin-top: 40px;">How to Use</h2>
+                <ol style="line-height: 2; color: #495057;">
+                    <li>Download the 1024×1024 SVG version for highest quality</li>
+                    <li>Or generate PNG versions using the buttons above</li>
+                    <li>Upload to Meta App Dashboard in the "App Icon" section</li>
+                    <li>Use the same icon across all your app's presence for consistency</li>
+                </ol>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 NeseMedia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function downloadPNG(size) {
+            // Create canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Create image from SVG
+            const img = new Image();
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0, size, size);
+                
+                // Convert to PNG and download
+                canvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `app-icon-${size}x${size}.png`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+            };
+            
+            // Load SVG
+            img.src = '/app-icon.svg';
+        }
+    </script>
+</body>
+</html>

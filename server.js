@@ -11,6 +11,9 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from public directory
+app.use(express.static('public'));
+
 // Read CSS file once at startup
 const styles = fs.readFileSync(path.join(__dirname, 'views', 'styles.css'), 'utf8');
 
@@ -41,6 +44,11 @@ app.get('/terms', (req, res) => {
 // Data Deletion
 app.get('/data-deletion', (req, res) => {
   serveHTML(res, 'data-deletion.html');
+});
+
+// App Icon Page
+app.get('/app-icon', (req, res) => {
+  serveHTML(res, 'app-icon.html');
 });
 
 // Instagram API endpoint
@@ -180,6 +188,8 @@ app.listen(PORT, () => {
     - GET /privacy       → Privacy Policy
     - GET /terms         → Terms of Service
     - GET /data-deletion → Data Deletion Instructions
+    - GET /app-icon      → App Icon & Downloads
+    - GET /app-icon.svg  → App Icon (SVG)
     - GET /api/instagram → Instagram API endpoint
     - GET /health        → Health check
     
