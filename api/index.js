@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+module.exports = (req, res) => {
+  const html = `<!DOCTYPE html>
 <html lang="no">
 <head>
     <meta charset="UTF-8">
@@ -67,6 +68,13 @@
         a:hover {
             text-decoration: underline;
         }
+        pre {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
     </style>
 </head>
 <body>
@@ -91,8 +99,7 @@
         
         <div class="endpoint">
             <h3>Response Format</h3>
-            <pre style="background: #1f2937; color: #e5e7eb; padding: 15px; border-radius: 6px; overflow-x: auto;">
-{
+            <pre>{
   "username": "cristiano",
   "profileUrl": "https://www.instagram.com/cristiano/",
   "fullName": "Cristiano Ronaldo",
@@ -114,4 +121,8 @@
         </p>
     </div>
 </body>
-</html>
+</html>`;
+  
+  res.setHeader('Content-Type', 'text/html');
+  res.status(200).send(html);
+};
