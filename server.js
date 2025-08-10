@@ -7,9 +7,14 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Enable CORS for all origins
-app.use(cors());
+// Enable CORS for all origins with all methods
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from public directory
 app.use(express.static('public'));
@@ -41,9 +46,35 @@ app.get('/terms', (req, res) => {
   serveHTML(res, 'terms.html');
 });
 
-// Data Deletion
+// Data Deletion - GET request (for users visiting the page)
 app.get('/data-deletion', (req, res) => {
   serveHTML(res, 'data-deletion.html');
+});
+
+// Data Deletion Callback - POST request (for Meta/Facebook)
+app.post('/data-deletion', (req, res) => {
+  // Log the deletion request (optional)
+  console.log('Data deletion request received:', req.body);
+  
+  // Since we don't store any user data, we just confirm the deletion
+  const confirmationCode = `del_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  
+  // Return response in the format Meta expects
+  res.json({
+    url: `https://${req.get('host')}/data-deletion-status?code=${confirmationCode}`,
+    confirmation_code: confirmationCode
+  });
+});
+
+// Data Deletion Status Check (optional endpoint for users to verify deletion)
+app.get('/data-deletion-status', (req, res) => {
+  const { code } = req.query;
+  res.json({
+    status: 'completed',
+    message: 'No user data was stored, so no deletion was necessary.',
+    confirmation_code: code || 'N/A',
+    timestamp: new Date().toISOString()
+  });
 });
 
 // App Icon Page
@@ -188,6 +219,8 @@ app.listen(PORT, () => {
     - GET /privacy       → Privacy Policy
     - GET /terms         → Terms of Service
     - GET /data-deletion → Data Deletion Instructions
+    - POST /data-deletion → Data Deletion Callback (Meta)
+    - GET /data-deletion-status → Deletion Status Check
     - GET /app-icon      → App Icon & Downloads
     - GET /app-icon.svg  → App Icon (SVG)
     - GET /api/instagram → Instagram API endpoint
