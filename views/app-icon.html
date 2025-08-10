@@ -176,7 +176,8 @@
                         <img src="/app-icon.svg" alt="1024x1024 Icon">
                         <div class="icon-size">1024×1024</div>
                         <div class="icon-desc">Meta App Store</div>
-                        <a href="/app-icon.svg" download="app-icon-1024.svg" class="download-btn">Download SVG</a>
+                        <button onclick="downloadPNG(1024)" class="download-btn" style="background: #dc3545;">Download PNG</button>
+                        <a href="/app-icon.svg" download="app-icon-1024.svg" class="download-btn" style="margin-top: 10px; display: inline-block;">Download SVG</a>
                     </div>
                     
                     <div class="icon-preview">
@@ -240,11 +241,16 @@
                 
                 <h2 style="margin-top: 40px;">How to Use</h2>
                 <ol style="line-height: 2; color: #495057;">
-                    <li>Download the 1024×1024 SVG version for highest quality</li>
-                    <li>Or generate PNG versions using the buttons above</li>
-                    <li>Upload to Meta App Dashboard in the "App Icon" section</li>
+                    <li><strong>For Meta App:</strong> Click "Download PNG" button for 1024×1024 version</li>
+                    <li>Or download SVG for scalable version</li>
+                    <li>Upload the PNG to Meta App Dashboard in the "App Icon" section</li>
                     <li>Use the same icon across all your app's presence for consistency</li>
                 </ol>
+                
+                <div style="background: #fff3e0; padding: 20px; border-radius: 8px; margin: 30px 0;">
+                    <h3 style="color: #e65100;">📱 Meta App Submission Tip</h3>
+                    <p style="margin: 0;"><strong>Use the 1024×1024 PNG version</strong> for Meta App submission. The red "Download PNG" button at the top will give you the exact format Meta requires.</p>
+                </div>
             </div>
         </div>
     </main>
