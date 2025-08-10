@@ -1,0 +1,16 @@
+{
+  "name": "vev-instagram-widget",
+  "version": "1.0.0",
+  "description": "Instagram Follow Widget for Vev with Vercel API",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build required for API'",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  }
+}
