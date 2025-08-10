@@ -1,5 +1,7 @@
 # Instagram Follow Widget for Vev
 
+Widget for å vise Instagram-profiler i Vev med Vercel API.
+
 ## Deploy til Vercel
 
 ### Steg 1: Installer Vercel CLI (om du ikke har det)
