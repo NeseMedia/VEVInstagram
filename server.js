@@ -1,6 +1,8 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,134 +11,36 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Health check endpoint
-app.get('/', (req, res) => {
-  const html = `<!DOCTYPE html>
-<html lang="no">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VEV Instagram Widget API</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        .container {
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-        .status {
-            display: inline-block;
-            background: #10b981;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
-        .endpoint {
-            background: #f3f4f6;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .endpoint h3 {
-            margin-top: 0;
-            color: #374151;
-        }
-        code {
-            background: #1f2937;
-            color: #10b981;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Monaco', 'Courier New', monospace;
-        }
-        .example {
-            background: #fef3c7;
-            border: 1px solid #fbbf24;
-            border-radius: 6px;
-            padding: 15px;
-            margin-top: 15px;
-        }
-        .example strong {
-            color: #92400e;
-        }
-        a {
-            color: #6366f1;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        pre {
-            background: #1f2937;
-            color: #e5e7eb;
-            padding: 15px;
-            border-radius: 6px;
-            overflow-x: auto;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>📷 VEV Instagram Widget API</h1>
-        <span class="status">✓ API er aktiv på Railway</span>
-        
-        <p>Dette er API-endepunktet for Instagram Follow Widget i Vev.</p>
-        
-        <div class="endpoint">
-            <h3>API Endpoint</h3>
-            <p><strong>GET</strong> <code>/api/instagram</code></p>
-            <p><strong>Parameter:</strong> <code>username</code> - Instagram brukernavn (uten @)</p>
-            
-            <div class="example">
-                <strong>Eksempel:</strong><br>
-                <a href="/api/instagram?username=cristiano" target="_blank">
-                    /api/instagram?username=cristiano
-                </a>
-            </div>
-        </div>
-        
-        <div class="endpoint">
-            <h3>Response Format</h3>
-            <pre>{
-  "username": "cristiano",
-  "profileUrl": "https://www.instagram.com/cristiano/",
-  "fullName": "Cristiano Ronaldo",
-  "profilePic": "...",
-  "followers": 600000000,
-  "isVerified": true,
-  "success": true
-}</pre>
-        </div>
-        
-        <div class="endpoint">
-            <h3>Bruk i Vev</h3>
-            <p>Denne API-en brukes automatisk av Instagram Follow Widget komponenten i Vev.</p>
-            <p>Bare legg til brukernavnet i komponent-innstillingene, så hentes data automatisk.</p>
-        </div>
-        
-        <p style="margin-top: 40px; color: #6b7280; text-align: center;">
-            <a href="https://github.com/NeseMedia/VEVInstagram" target="_blank">GitHub Repository</a>
-        </p>
-    </div>
-</body>
-</html>`;
-  
+// Read CSS file once at startup
+const styles = fs.readFileSync(path.join(__dirname, 'views', 'styles.css'), 'utf8');
+
+// Helper function to serve HTML with embedded styles
+function serveHTML(res, filename) {
+  const htmlPath = path.join(__dirname, 'views', filename);
+  let html = fs.readFileSync(htmlPath, 'utf8');
+  html = html.replace('___STYLES___', styles);
   res.setHeader('Content-Type', 'text/html');
   res.send(html);
+}
+
+// Landing page
+app.get('/', (req, res) => {
+  serveHTML(res, 'index.html');
+});
+
+// Privacy Policy
+app.get('/privacy', (req, res) => {
+  serveHTML(res, 'privacy.html');
+});
+
+// Terms of Service
+app.get('/terms', (req, res) => {
+  serveHTML(res, 'terms.html');
+});
+
+// Data Deletion
+app.get('/data-deletion', (req, res) => {
+  serveHTML(res, 'data-deletion.html');
 });
 
 // Instagram API endpoint
@@ -211,7 +115,74 @@ app.get('/api/instagram', async (req, res) => {
   }
 });
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'healthy', 
+    service: 'Instagram Widget for Vev',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>404 - Page Not Found</title>
+      <style>
+        body { 
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+          text-align: center;
+          background: white;
+          padding: 40px;
+          border-radius: 12px;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 { color: #333; margin-bottom: 10px; }
+        p { color: #666; margin-bottom: 20px; }
+        a { 
+          color: #1877f2; 
+          text-decoration: none;
+          font-weight: 600;
+        }
+        a:hover { text-decoration: underline; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>404 - Page Not Found</h1>
+        <p>The page you're looking for doesn't exist.</p>
+        <a href="/">Return to Home</a>
+      </div>
+    </body>
+    </html>
+  `);
+});
+
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`
+    🚀 Server is running on port ${PORT}
+    📷 Instagram Widget for Vev
+    
+    Available endpoints:
+    - GET /              → Landing page
+    - GET /privacy       → Privacy Policy
+    - GET /terms         → Terms of Service
+    - GET /data-deletion → Data Deletion Instructions
+    - GET /api/instagram → Instagram API endpoint
+    - GET /health        → Health check
+    
+    Ready for Meta App Review! 🎉
+  `);
 });
