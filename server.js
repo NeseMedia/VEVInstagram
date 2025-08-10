@@ -3,6 +3,7 @@ const axios = require('axios');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -80,6 +81,118 @@ app.get('/data-deletion-status', (req, res) => {
 // App Icon Page
 app.get('/app-icon', (req, res) => {
   serveHTML(res, 'app-icon.html');
+});
+
+// Test Meta API Page
+app.get('/test-meta-api', (req, res) => {
+  serveHTML(res, 'test-meta-api.html');
+});
+
+// Check environment variables (for testing)
+app.get('/api/check-env', (req, res) => {
+  const configured = !!(process.env.INSTAGRAM_APP_ID && process.env.INSTAGRAM_APP_SECRET);
+  res.json({
+    configured,
+    appId: process.env.INSTAGRAM_APP_ID ? process.env.INSTAGRAM_APP_ID.substring(0, 6) + '...' : null,
+    hasSecret: !!process.env.INSTAGRAM_APP_SECRET,
+    redirectUri: process.env.INSTAGRAM_REDIRECT_URI || 'Not set'
+  });
+});
+
+// OAuth callback handler
+app.get('/auth/instagram/callback', (req, res) => {
+  const { code, error, error_description } = req.query;
+  
+  if (error) {
+    return res.send(`
+      <html>
+        <body>
+          <h2>Authorization Error</h2>
+          <p>Error: ${error}</p>
+          <p>Description: ${error_description || 'No description'}</p>
+          <a href="/test-meta-api">Go back to test page</a>
+        </body>
+      </html>
+    `);
+  }
+  
+  if (code) {
+    return res.send(`
+      <html>
+        <body>
+          <h2>Authorization Successful!</h2>
+          <p>Authorization code received:</p>
+          <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">${code}</pre>
+          <p>Copy this code and paste it in the test page to exchange for an access token.</p>
+          <a href="/test-meta-api">Go back to test page</a>
+        </body>
+      </html>
+    `);
+  }
+  
+  res.send('No code or error received');
+});
+
+// Exchange authorization code for access token
+app.post('/api/instagram/exchange-token', async (req, res) => {
+  const { code } = req.body;
+  
+  if (!code) {
+    return res.status(400).json({ error: 'Authorization code is required' });
+  }
+  
+  const clientId = process.env.INSTAGRAM_APP_ID;
+  const clientSecret = process.env.INSTAGRAM_APP_SECRET;
+  const redirectUri = process.env.INSTAGRAM_REDIRECT_URI || 'https://vevinstagram-production.up.railway.app/auth/instagram/callback';
+  
+  if (!clientId || !clientSecret) {
+    return res.status(500).json({ 
+      error: 'Instagram App credentials not configured',
+      hint: 'Set INSTAGRAM_APP_ID and INSTAGRAM_APP_SECRET environment variables'
+    });
+  }
+  
+  try {
+    const response = await axios.post('https://api.instagram.com/oauth/access_token', {
+      client_id: clientId,
+      client_secret: clientSecret,
+      grant_type: 'authorization_code',
+      redirect_uri: redirectUri,
+      code: code
+    }, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    });
+    
+    res.json(response.data);
+  } catch (error) {
+    console.error('Token exchange error:', error.response?.data || error.message);
+    res.status(400).json({ 
+      error: 'Failed to exchange token',
+      details: error.response?.data || error.message
+    });
+  }
+});
+
+// Get user profile with access token
+app.get('/api/instagram/user-profile', async (req, res) => {
+  const { token } = req.query;
+  
+  if (!token) {
+    return res.status(400).json({ error: 'Access token is required' });
+  }
+  
+  try {
+    const response = await axios.get(`https://graph.instagram.com/me?fields=id,username,account_type,media_count&access_token=${token}`);
+    res.json(response.data);
+  } catch (error) {
+    console.error('API call error:', error.response?.data || error.message);
+    res.status(400).json({ 
+      error: 'Failed to fetch user profile',
+      details: error.response?.data || error.message
+    });
+  }
 });
 
 // Instagram API endpoint

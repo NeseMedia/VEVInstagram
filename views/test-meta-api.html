@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Meta API Integration - Instagram Widget for Vev</title>
+    <style>___STYLES___</style>
+    <style>
+        .test-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 2px solid #dee2e6;
+        }
+        
+        .test-section h3 {
+            color: #495057;
+            margin-top: 0;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-pending { background: #ffc107; }
+        .status-success { background: #28a745; }
+        .status-error { background: #dc3545; }
+        
+        .config-list {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .config-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .config-item:last-child {
+            border-bottom: none;
+        }
+        
+        .config-label {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .config-value {
+            font-family: monospace;
+            color: #007bff;
+            font-size: 14px;
+        }
+        
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        
+        .test-button:hover {
+            background: #0056b3;
+        }
+        
+        .test-button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        .response-display {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .warning-box h4 {
+            color: #856404;
+            margin-top: 0;
+        }
+        
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .step-list li {
+            counter-increment: step-counter;
+            margin: 20px 0;
+            padding-left: 50px;
+            position: relative;
+        }
+        
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #007bff;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">
+                    <div class="logo-icon">📷</div>
+                    <span class="logo-text">Instagram Widget for Vev</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/test-meta-api">API Test</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <h1>🧪 Test Meta API Integration</h1>
+                <p>Test your Instagram Basic Display API setup before submitting to Meta for review.</p>
+                
+                <div class="warning-box">
+                    <h4>⚠️ Before You Start</h4>
+                    <p>Make sure you have completed these steps in the Meta Developer Dashboard:</p>
+                    <ol>
+                        <li>Created a Facebook App</li>
+                        <li>Added Instagram Basic Display product</li>
+                        <li>Configured OAuth Redirect URIs</li>
+                        <li>Added test users (Instagram Test Users)</li>
+                        <li>Generated App ID and App Secret</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Configuration Status -->
+            <div class="card">
+                <h2>📋 Current Configuration</h2>
+                <div class="config-list">
+                    <div class="config-item">
+                        <span class="config-label">App Status:</span>
+                        <span class="config-value" id="app-status">Not Configured</span>
+                    </div>
+                    <div class="config-item">
+                        <span class="config-label">Instagram App ID:</span>
+                        <span class="config-value" id="app-id">Not Set</span>
+                    </div>
+                    <div class="config-item">
+                        <span class="config-label">Redirect URI:</span>
+                        <span class="config-value" id="redirect-uri">Not Set</span>
+                    </div>
+                    <div class="config-item">
+                        <span class="config-label">API Version:</span>
+                        <span class="config-value">v18.0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Steps -->
+            <div class="card">
+                <h2>🚀 Testing Steps</h2>
+                
+                <div class="test-section">
+                    <h3><span class="status-indicator status-pending"></span>Step 1: Check Environment Variables</h3>
+                    <p>Verify that your environment variables are properly set in Railway/Vercel.</p>
+                    <button class="test-button" onclick="checkEnvVars()">Check Environment</button>
+                    <div id="env-result" class="response-display" style="display: none;"></div>
+                </div>
+
+                <div class="test-section">
+                    <h3><span class="status-indicator status-pending"></span>Step 2: Test OAuth Flow</h3>
+                    <p>This will open Instagram's authorization page. Make sure you're logged in with a test user.</p>
+                    <button class="test-button" onclick="startOAuth()" id="oauth-button">Start OAuth Flow</button>
+                    <div id="oauth-result" class="response-display" style="display: none;"></div>
+                </div>
+
+                <div class="test-section">
+                    <h3><span class="status-indicator status-pending"></span>Step 3: Exchange Code for Token</h3>
+                    <p>After authorization, exchange the code for an access token.</p>
+                    <input type="text" id="auth-code" placeholder="Paste authorization code here" style="width: 100%; padding: 10px; margin: 10px 0;">
+                    <button class="test-button" onclick="exchangeToken()">Exchange for Token</button>
+                    <div id="token-result" class="response-display" style="display: none;"></div>
+                </div>
+
+                <div class="test-section">
+                    <h3><span class="status-indicator status-pending"></span>Step 4: Test API Call</h3>
+                    <p>Use the access token to fetch user data.</p>
+                    <input type="text" id="access-token" placeholder="Paste access token here" style="width: 100%; padding: 10px; margin: 10px 0;">
+                    <button class="test-button" onclick="testAPICall()">Test API Call</button>
+                    <div id="api-result" class="response-display" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- Setup Instructions -->
+            <div class="card">
+                <h2>📚 Required Setup in Meta Dashboard</h2>
+                
+                <ol class="step-list">
+                    <li>
+                        <h4>Create Instagram Basic Display App</h4>
+                        <p>Go to <a href="https://developers.facebook.com/apps" target="_blank">Meta for Developers</a></p>
+                        <p>Create new app → Select "Consumer" → Add Instagram Basic Display</p>
+                    </li>
+                    
+                    <li>
+                        <h4>Configure OAuth Redirect URIs</h4>
+                        <p>Add these URIs to your Instagram Basic Display settings:</p>
+                        <div class="code-block">
+https://vevinstagram-production.up.railway.app/auth/instagram/callback
+https://localhost:3000/auth/instagram/callback (for local testing)</div>
+                    </li>
+                    
+                    <li>
+                        <h4>Add Instagram Test Users</h4>
+                        <p>In Roles → Instagram Testers → Add Instagram Testers</p>
+                        <p>The test user must accept the invitation from Instagram Settings</p>
+                    </li>
+                    
+                    <li>
+                        <h4>Get App Credentials</h4>
+                        <p>From Instagram Basic Display → Basic Display:</p>
+                        <ul>
+                            <li>Instagram App ID</li>
+                            <li>Instagram App Secret</li>
+                            <li>Client Token (generate one)</li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <h4>Set Environment Variables in Railway</h4>
+                        <p>Add these to your Railway project variables:</p>
+                        <div class="code-block">
+INSTAGRAM_APP_ID=your_app_id
+INSTAGRAM_APP_SECRET=your_app_secret
+INSTAGRAM_REDIRECT_URI=https://vevinstagram-production.up.railway.app/auth/instagram/callback</div>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Permissions Required -->
+            <div class="card">
+                <h2>🔐 Required Permissions</h2>
+                <p>For basic profile data, you need these permissions:</p>
+                <ul>
+                    <li><strong>user_profile</strong> - Read access to profile info</li>
+                    <li><strong>user_media</strong> - Read access to media (optional)</li>
+                </ul>
+                <p>These are automatically granted for your own account and test users during development.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 NeseMedia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Check environment variables
+        async function checkEnvVars() {
+            const resultDiv = document.getElementById('env-result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Checking environment...';
+            
+            try {
+                const response = await fetch('/api/check-env');
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <h4>Environment Status:</h4>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                
+                // Update status indicators
+                if (data.configured) {
+                    document.getElementById('app-status').textContent = 'Configured';
+                    document.getElementById('app-status').style.color = '#28a745';
+                    document.getElementById('app-id').textContent = data.appId || 'Hidden';
+                    document.getElementById('redirect-uri').textContent = data.redirectUri || 'Not Set';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error-message">Error: ${error.message}</div>`;
+            }
+        }
+        
+        // Start OAuth flow
+        function startOAuth() {
+            const appId = prompt('Enter your Instagram App ID:');
+            if (!appId) return;
+            
+            const redirectUri = encodeURIComponent('https://vevinstagram-production.up.railway.app/auth/instagram/callback');
+            const scope = 'user_profile,user_media';
+            const responseType = 'code';
+            
+            const authUrl = `https://api.instagram.com/oauth/authorize?client_id=${appId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
+            
+            document.getElementById('oauth-result').style.display = 'block';
+            document.getElementById('oauth-result').innerHTML = `
+                <h4>Authorization URL:</h4>
+                <div class="code-block">${authUrl}</div>
+                <p>Opening in new window... Check for the authorization code in the redirect URL.</p>
+            `;
+            
+            window.open(authUrl, '_blank');
+        }
+        
+        // Exchange code for token
+        async function exchangeToken() {
+            const code = document.getElementById('auth-code').value;
+            if (!code) {
+                alert('Please enter the authorization code');
+                return;
+            }
+            
+            const resultDiv = document.getElementById('token-result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Exchanging code for token...';
+            
+            try {
+                const response = await fetch('/api/instagram/exchange-token', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code })
+                });
+                
+                const data = await response.json();
+                
+                if (data.access_token) {
+                    resultDiv.innerHTML = `
+                        <div class="success-message">
+                            <h4>Success! Token received:</h4>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        </div>
+                    `;
+                    document.getElementById('access-token').value = data.access_token;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="error-message">
+                            <h4>Error:</h4>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error-message">Error: ${error.message}</div>`;
+            }
+        }
+        
+        // Test API call with token
+        async function testAPICall() {
+            const token = document.getElementById('access-token').value;
+            if (!token) {
+                alert('Please enter an access token');
+                return;
+            }
+            
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Making API call...';
+            
+            try {
+                const response = await fetch(`/api/instagram/user-profile?token=${token}`);
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <h4>API Response:</h4>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error-message">Error: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>
