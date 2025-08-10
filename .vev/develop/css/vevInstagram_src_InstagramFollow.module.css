@@ -1,0 +1,373 @@
+/* Base Widget Styles */
+.widget__InstagramFollow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.widget__InstagramFollow:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Layout Variations */
+.widget__InstagramFollow.vertical__InstagramFollow {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  max-width: 280px;
+}
+
+.widget__InstagramFollow.vertical__InstagramFollow .content__InstagramFollow {
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.widget__InstagramFollow.compact__InstagramFollow {
+  padding: 0.75rem 1rem;
+  max-width: 300px;
+}
+
+.widget__InstagramFollow.compact__InstagramFollow .profilePic__InstagramFollow,
+.widget__InstagramFollow.compact__InstagramFollow .profilePlaceholder__InstagramFollow {
+  width: 40px;
+  height: 40px;
+}
+
+.widget__InstagramFollow.compact__InstagramFollow .username__InstagramFollow {
+  font-size: 0.9375rem;
+}
+
+.widget__InstagramFollow.compact__InstagramFollow .followButton__InstagramFollow {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* Content Section */
+.content__InstagramFollow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Profile Section */
+.profileSection__InstagramFollow {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profilePic__InstagramFollow {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 2px solid rgba(228, 64, 95, 0.1);
+  transition: border-color 0.2s ease;
+}
+
+.profilePic__InstagramFollow:hover {
+  border-color: rgba(228, 64, 95, 0.3);
+}
+
+.profilePlaceholder__InstagramFollow {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Text Section */
+.textSection__InstagramFollow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.username__InstagramFollow {
+  font-weight: 600;
+  font-size: 1rem;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.verified__InstagramFollow {
+  color: #1da1f2;
+  font-size: 0.875rem;
+  font-weight: 700;
+  background: #1da1f2;
+  color: white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.fullName__InstagramFollow {
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.followers__InstagramFollow {
+  font-size: 0.8125rem;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 400;
+}
+
+.errorText__InstagramFollow {
+  font-size: 0.75rem;
+  color: #dc2626;
+  font-style: italic;
+}
+
+/* Follow Button */
+.followButton__InstagramFollow {
+  background: #E4405F;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 120px;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.followButton__InstagramFollow:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(228, 64, 95, 0.3);
+  filter: brightness(1.05);
+}
+
+.followButton__InstagramFollow:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(228, 64, 95, 0.2);
+}
+
+.followButton__InstagramFollow:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Loading States */
+.loadingText__InstagramFollow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spinner__InstagramFollow {
+  width: 14px;
+  height: 14px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin__InstagramFollow 1s linear infinite;
+}
+
+@keyframes spin__InstagramFollow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Placeholder State */
+.placeholder__InstagramFollow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  background: #f9fafb;
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  color: #6b7280;
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.placeholderIcon__InstagramFollow {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.6;
+}
+
+.placeholderText__InstagramFollow {
+  font-size: 0.9375rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .widget__InstagramFollow {
+    max-width: 100%;
+    padding: 1rem;
+  }
+  
+  .widget__InstagramFollow.horizontal__InstagramFollow {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .widget__InstagramFollow.horizontal__InstagramFollow .content__InstagramFollow {
+    justify-content: center;
+  }
+  
+  .widget__InstagramFollow.horizontal__InstagramFollow .followButton__InstagramFollow {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .username__InstagramFollow {
+    font-size: 0.9375rem;
+  }
+  
+  .followButton__InstagramFollow {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .widget__InstagramFollow {
+    padding: 0.875rem;
+  }
+  
+  .profilePic__InstagramFollow,
+  .profilePlaceholder__InstagramFollow {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .username__InstagramFollow {
+    font-size: 0.875rem;
+  }
+  
+  .followButton__InstagramFollow {
+    padding: 0.75rem 1rem;
+    font-size: 0.8125rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .widget__InstagramFollow {
+    background: #1f2937;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #f9fafb;
+  }
+  
+  .fullName__InstagramFollow {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .followers__InstagramFollow {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .placeholder__InstagramFollow {
+    background: #374151;
+    border-color: #4b5563;
+    color: #9ca3af;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .widget__InstagramFollow {
+    border: 2px solid #000000;
+  }
+  
+  .followButton__InstagramFollow {
+    border: 2px solid #000000;
+    font-weight: 700;
+  }
+  
+  .profilePic__InstagramFollow {
+    border: 3px solid #000000;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .widget__InstagramFollow,
+  .followButton__InstagramFollow,
+  .profilePic__InstagramFollow {
+    transition: none;
+  }
+  
+  .widget__InstagramFollow:hover {
+    transform: none;
+  }
+  
+  .followButton__InstagramFollow:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  .spinner__InstagramFollow {
+    animation: none;
+  }
+}
+
+/* Focus States for Accessibility */
+.followButton__InstagramFollow:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.followButton__InstagramFollow:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.followButton__InstagramFollow:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}

@@ -1,0 +1,201 @@
+{
+  "key": "aaBMkGO4J2InY9M2VbZp",
+  "public": 0,
+  "admin": false,
+  "children": [
+    {
+      "widgetName": "Instagram Follow Widget",
+      "name": "Instagram Follow Widget",
+      "widgetId": "aaBMkGO4J2InY9M2VbZp_InstagramFollow",
+      "key": "aaBMkGO4J2InY9M2VbZp_InstagramFollow",
+      "pkg": "aaBMkGO4J2InY9M2VbZp",
+      "formSchema": [
+        {
+          "name": "username",
+          "type": "string",
+          "title": "Instagram brukernavn",
+          "description": "Skriv brukernavnet uten @ tegn",
+          "initialValue": ""
+        },
+        {
+          "name": "ctaText",
+          "type": "string",
+          "title": "Knapp-tekst",
+          "initialValue": "Følg oss på Instagram"
+        },
+        {
+          "name": "displayStyle",
+          "type": "select",
+          "title": "Layout-stil",
+          "options": {
+            "items": [
+              {
+                "label": "Horisontal",
+                "value": "horizontal"
+              },
+              {
+                "label": "Vertikal",
+                "value": "vertical"
+              },
+              {
+                "label": "Kompakt",
+                "value": "compact"
+              }
+            ]
+          },
+          "initialValue": "horizontal"
+        },
+        {
+          "name": "showFollowerCount",
+          "type": "boolean",
+          "title": "Vis antall følgere",
+          "initialValue": true
+        },
+        {
+          "name": "showProfilePicture",
+          "type": "boolean",
+          "title": "Vis profilbilde",
+          "initialValue": true
+        },
+        {
+          "name": "backgroundColor",
+          "type": "string",
+          "title": "Bakgrunnsfarge",
+          "initialValue": "#FFFFFF"
+        },
+        {
+          "name": "buttonColor",
+          "type": "string",
+          "title": "Knapp-farge",
+          "initialValue": "#E4405F"
+        },
+        {
+          "name": "buttonTextColor",
+          "type": "string",
+          "title": "Knapp-tekstfarge",
+          "initialValue": "#FFFFFF"
+        },
+        {
+          "name": "textColor",
+          "type": "string",
+          "title": "Tekstfarge",
+          "initialValue": "#000000"
+        },
+        {
+          "name": "borderRadius",
+          "type": "number",
+          "title": "Hjørne-radius (px)",
+          "initialValue": 12,
+          "options": {
+            "min": 0,
+            "max": 50
+          }
+        },
+        {
+          "name": "apiEndpoint",
+          "type": "string",
+          "title": "API Endpoint URL",
+          "description": "Din Vercel API URL",
+          "initialValue": "https://vev-instagram-jgw391ida-nesemedias-projects.vercel.app/api/instagram"
+        }
+      ],
+      "type": 0,
+      "widgetFuncName": "InstagramFollow",
+      "categories": [
+        "Localhost"
+      ],
+      "size": [
+        3,
+        3
+      ],
+      "transform": {
+        "width": 100,
+        "height": 100
+      },
+      "metaData": [
+        {
+          "selector": ".widget__InstagramFollow",
+          "name": ""
+        },
+        {
+          "selector": ".followButton__InstagramFollow",
+          "name": ""
+        },
+        {
+          "selector": ".username__InstagramFollow",
+          "name": ""
+        },
+        {
+          "selector": ".fullName__InstagramFollow",
+          "name": ""
+        },
+        {
+          "selector": ".followers__InstagramFollow",
+          "name": ""
+        },
+        {
+          "selector": ".profilePic__InstagramFollow",
+          "name": ""
+        },
+        {
+          "selector": ".content__InstagramFollow",
+          "name": ""
+        }
+      ],
+      "editableCSScomputed": {
+        ".widget__InstagramFollow": {
+          "background": "#ffffff",
+          "padding": "1rem 1.25rem",
+          "margin": null,
+          "border": "1px solid rgba(0,0,0,0.05)",
+          "box-shadow": "0 2px 8px rgba(0,0,0,0.08)",
+          "border-radius": "12px"
+        },
+        ".followButton__InstagramFollow": {
+          "font-size": "0.9375rem",
+          "font-weight": "600",
+          "padding": "0.75rem 1.5rem",
+          "border-radius": "8px",
+          "border": "none",
+          "box-shadow": null
+        },
+        ".username__InstagramFollow": {
+          "font-size": "1rem",
+          "font-weight": "600",
+          "color": "inherit",
+          "font-family": null
+        },
+        ".fullName__InstagramFollow": {
+          "font-size": "0.875rem",
+          "color": "rgba(0,0,0,0.6)",
+          "font-family": null,
+          "font-weight": "400"
+        },
+        ".followers__InstagramFollow": {
+          "font-size": "0.8125rem",
+          "color": "rgba(0,0,0,0.5)",
+          "font-family": null,
+          "opacity": null
+        },
+        ".profilePic__InstagramFollow": {
+          "width": "50px",
+          "height": "50px",
+          "border-radius": "50%",
+          "border": "2px solid rgba(228,64,95,0.1)",
+          "box-shadow": null
+        },
+        ".content__InstagramFollow": {
+          "gap": "0.75rem",
+          "align-items": "center",
+          "justify-content": null
+        }
+      },
+      "shareWithAccount": false,
+      "admin": false,
+      "content": "",
+      "updated": 1754832774489,
+      "created": 1754832774489
+    }
+  ],
+  "shareWithAccount": false
+}

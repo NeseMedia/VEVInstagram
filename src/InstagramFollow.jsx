@@ -13,7 +13,7 @@ const InstagramFollow = ({
   buttonTextColor = '#FFFFFF',
   textColor = '#000000',
   borderRadius = 12,
-  apiEndpoint = 'https://your-project.vercel.app/api/instagram'
+  apiEndpoint = 'https://vev-instagram-jgw391ida-nesemedias-projects.vercel.app/api/instagram'
 }) => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -273,7 +273,7 @@ registerVevComponent(InstagramFollow, {
       type: 'string',
       title: 'API Endpoint URL',
       description: 'Din Vercel API URL',
-      initialValue: 'https://your-project.vercel.app/api/instagram'
+      initialValue: 'https://vev-instagram-jgw391ida-nesemedias-projects.vercel.app/api/instagram'
     }
   ],
   editableCSS: [
